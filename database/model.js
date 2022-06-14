@@ -1,10 +1,15 @@
 import db from "./connection.js"
 
-function getAllProducts() {
-    const GET_ALL_PRODUCTS = `SELECT * FROM products`
-    return db
-        .query(GET_ALL_PRODUCTS)
-        .then((result) => result.rows)
-};
+async function getAllProducts() {
+    const query_text = /* sql */ `
+  SELECT products.*, categories.category, brands.brand 
+  FROM products
+  INNER JOIN categories ON categories.id=products.category_id
+  INNER JOIN brands ON brands.id = products.brand_id`;
+    return await db
+        .query(query_text)
+        .then((products) => products)
+        .then(console.log);
+}
 
 export { getAllProducts }
