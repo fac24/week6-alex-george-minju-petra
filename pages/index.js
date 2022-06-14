@@ -6,11 +6,11 @@ export default function Home() {
   return (
     <Layout>
       <div>
-        <h1>Products</h1>
+        <h1 className="text-3xl font-bold underline">Products</h1>
         <ul>
-          <li>Product 1</li>
-          <li>Product 2</li>
-          <li>Product 3</li>
+          <li className="text-md font-bold ">Product 1</li>
+          <li className="text-md font-bold ">Product 2</li>
+          <li className="text-md font-bold ">Product 3</li>
         </ul>
       </div>
     </Layout>
