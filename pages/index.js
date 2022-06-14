@@ -7,6 +7,7 @@ import { getAllProducts } from "../database/model";
 export async function getServerSideProps() {
   const allProducts = await getAllProducts();
   //if line 9 was a db request or something, it would need an await
+  console.log(getAllProducts());
   return {
     props: {
       allProducts,
@@ -26,6 +27,8 @@ export default function Home({ allProducts }) {
             <Image
               src={product.photo_url}
               alt=''
+              width={100}
+              height={100}
             />
             <h3 className="index-product-h3">{product.name}</h3>
             <p className="index-product-price">£{product.price}</p>

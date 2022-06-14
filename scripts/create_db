@@ -15,5 +15,5 @@ psql -q -c "CREATE DATABASE ${DB_NAME} WITH OWNER ${DB_NAME}user"
 echo "Created Postgres database '${DB_NAME}'"
 
 DB_URL="postgres://${DB_NAME}user:pass123@localhost:5432/${DB_NAME}"
-echo "DATABASE_URL='${DB_URL}'" > .env
+echo "DATABASE_URL='${DB_URL}'" > .env.local
 echo "Created .env.local containing DATABASE_URL"
