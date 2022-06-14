@@ -3,24 +3,27 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Filter from "../components/Filter";
 import { getAllProducts } from "../database/model";
+import { getAllCategories } from "../database/model.js";
 
 export async function getServerSideProps() {
   const allProducts = await getAllProducts();
+  const allCategories = await getAllCategories();
   //if line 9 was a db request or something, it would need an await
   return {
     props: {
       allProducts,
+      allCategories
     },
   };
 }
 
-export default function Home({ allProducts }) {
+export default function Home({ allProducts, allCategories }) {
   return (
     <Layout>
 
       <div>
         <h2>Products</h2>
-        <Filter />
+        <Filter allCategories={allCategories} />
         <ul>
           {allProducts.map((product) => (<li key={product.id}>
             <Image

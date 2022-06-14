@@ -13,10 +13,10 @@ export async function getAllProducts() {
 
 export async function getAllCategories() {
   const query_text = /* sql */ `
-  SELECT * FROM categories;`
+  SELECT category FROM categories;`
   return await db
     .query(query_text)
-    .then((categories) => console.log('////', categories))
+    .then((categories) => categories.rows)
 }
 
 // export { getAllProducts, getAllCategories }

@@ -1,6 +1,6 @@
 import React from "react";
-// import getAllCategories from "../database/model.js";
-import { getAllCategories } from "../database/model";
+
+
 // export async function getServerSideProps() {
 //   const allCategories = await getAllCategories();
 //   //if line 9 was a db request or something, it would need an await
@@ -12,7 +12,8 @@ import { getAllCategories } from "../database/model";
 //   };
 // }
 
-export default function Filter() {
+export default function Filter({ allCategories }) {
+  console.log(allCategories);
   return (
     <form>
       <fieldset>
@@ -22,7 +23,8 @@ export default function Filter() {
       <fieldset>
         <label htmlFor="category">Choose a category:</label>
         <select name="category" id="category">
-          {/* {allCategories.map((category) => { <option value={category}>{category}</option> })} */}
+          {allCategories.map((category) => <option key={category.category} value={category.category}>{category.category}</option>
+          )}
         </select>
       </fieldset>
       <fieldset>
