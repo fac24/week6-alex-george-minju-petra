@@ -8,7 +8,7 @@ export default function Filter({ allCategories, category, setCategory }) {
         <input type="search" id="search" />
       </fieldset>
       <fieldset>
-        <label htmlFor="category">Choose a category:</label>
+        <label htmlFor="category">choose a category:</label>
         <select
           name="category"
           id="category"
