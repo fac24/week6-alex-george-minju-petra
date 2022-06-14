@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Filter({ allCategories, setCategory }) {
+export default function Filter({ allCategories, category, setCategory }) {
   return (
     <form>
       <fieldset>
@@ -9,10 +9,19 @@ export default function Filter({ allCategories, setCategory }) {
       </fieldset>
       <fieldset>
         <label htmlFor="category">Choose a category:</label>
-        <select name="category" id="category">
-          <option key="all" value="all">all</option>
-          {allCategories.map((category) => <option key={category.category} value={category.category} onChange={(event) => setCategory(event.target.value)}>{category.category}</option>
-          )}
+        <select
+          name="category"
+          id="category"
+          onChange={(event) => setCategory(event.target.value)}
+        >
+          <option key="all" value="all">
+            all
+          </option>
+          {allCategories.map((category) => (
+            <option key={category.category} value={category.category}>
+              {category.category}
+            </option>
+          ))}
         </select>
       </fieldset>
       <fieldset>

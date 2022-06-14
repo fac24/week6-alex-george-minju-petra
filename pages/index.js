@@ -13,7 +13,7 @@ export async function getServerSideProps() {
   return {
     props: {
       allProducts,
-      allCategories
+      allCategories,
     },
   };
 }
@@ -23,24 +23,31 @@ export default function Home({ allProducts, allCategories }) {
   console.log(category);
   return (
     <Layout>
-
       <div>
         <h2>Products</h2>
-        <Filter allCategories={allCategories} setCategory={setCategory} />
+        <Filter
+          allCategories={allCategories}
+          category={category}
+          setCategory={setCategory}
+        />
         <ul>
-          {allProducts.filter((product) => category === 'all' || product.category === category)
-            .map((product) => (<li key={product.id}>
-              <Image
-                src={product.photo_url}
-                alt=''
-                width={100}
-                height={100}
-              />
-              <h3 className="index-product-h3">{product.name}</h3>
-              <p className="index-product-price">£{product.price}</p>
-              <button>Add to basket</button>
-            </li>))
-          }
+          {allProducts
+            .filter(
+              (product) => category === "all" || product.category === category
+            )
+            .map((product) => (
+              <li key={product.id}>
+                <Image
+                  src={product.photo_url}
+                  alt=""
+                  width={100}
+                  height={100}
+                />
+                <h3 className="index-product-h3">{product.name}</h3>
+                <p className="index-product-price">£{product.price}</p>
+                <button>Add to basket</button>
+              </li>
+            ))}
         </ul>
       </div>
     </Layout>
