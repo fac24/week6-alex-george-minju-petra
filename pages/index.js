@@ -25,8 +25,6 @@ export default function Home({ allProducts }) {
           {allProducts.map((product) => (<li key={product.id}>
             <Image
               src={product.photo_url}
-              height={144}
-              width={144}
               alt=''
             />
             <h3 className="index-product-h3">{product.name}</h3>
