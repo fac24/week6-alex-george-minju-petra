@@ -1,19 +1,6 @@
 import React from "react";
 
-
-// export async function getServerSideProps() {
-//   const allCategories = await getAllCategories();
-//   //if line 9 was a db request or something, it would need an await
-//   console.log(getAllCategories());
-//   return {
-//     props: {
-//       allCategories,
-//     },
-//   };
-// }
-
-export default function Filter({ allCategories }) {
-  console.log(allCategories);
+export default function Filter({ allCategories, setCategory }) {
   return (
     <form>
       <fieldset>
@@ -23,7 +10,8 @@ export default function Filter({ allCategories }) {
       <fieldset>
         <label htmlFor="category">Choose a category:</label>
         <select name="category" id="category">
-          {allCategories.map((category) => <option key={category.category} value={category.category}>{category.category}</option>
+          <option key="all" value="all">all</option>
+          {allCategories.map((category) => <option key={category.category} value={category.category} onChange={(event) => setCategory(event.target.value)}>{category.category}</option>
           )}
         </select>
       </fieldset>
@@ -37,24 +25,3 @@ export default function Filter({ allCategories }) {
     </form>
   );
 }
-
-// function CategoryFilter(props) {
-//   return (
-//       <fieldset>
-//           {array.map((item) => (
-//               <label htmlFor="item" key={item}>
-//                   {item}
-//                   <input
-//                       type="radio"
-//                       name="categories"
-//                       id={item}
-//                       value={item}
-//                       checked={props.startCategory === item}
-//                       onChange={(event) => props.changeCategory(event.target.value)}
-//                   />
-//               </label>
-//           ))}
-
-
-//       </fieldset>
-//   )
