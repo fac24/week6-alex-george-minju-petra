@@ -9,5 +9,5 @@ set -e
 # import .env so we can access DB URL
 . .env
 
-psql $DATABASE_URL -q -f "../database/init.sql"
+psql $DATABASE_URL -q -f "./database/init.sql"
 echo "Populated database tables"
