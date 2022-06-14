@@ -1,11 +1,18 @@
 import React from "react";
-import { getAllCategories } from "../database/model.js";
+// import getAllCategories from "../database/model.js";
+import { getAllCategories } from "../database/model";
+// export async function getServerSideProps() {
+//   const allCategories = await getAllCategories();
+//   //if line 9 was a db request or something, it would need an await
+//   console.log(getAllCategories());
+//   return {
+//     props: {
+//       allCategories,
+//     },
+//   };
+// }
 
-console.log(getAllCategories)
-
-// {getAllCategories.map((category) => { <option value={category.category}>{category.category}</option> })}
-
-export default function Filter({ getAllCategories }) {
+export default function Filter() {
   return (
     <form>
       <fieldset>
@@ -15,7 +22,7 @@ export default function Filter({ getAllCategories }) {
       <fieldset>
         <label htmlFor="category">Choose a category:</label>
         <select name="category" id="category">
-          <option value='Phone'>Phone</option>
+          {/* {allCategories.map((category) => { <option value={category}>{category}</option> })} */}
         </select>
       </fieldset>
       <fieldset>

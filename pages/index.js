@@ -7,7 +7,6 @@ import { getAllProducts } from "../database/model";
 export async function getServerSideProps() {
   const allProducts = await getAllProducts();
   //if line 9 was a db request or something, it would need an await
-  console.log(getAllProducts());
   return {
     props: {
       allProducts,

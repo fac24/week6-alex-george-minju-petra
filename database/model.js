@@ -1,6 +1,6 @@
 import db from "./connection.js"
 
-async function getAllProducts() {
+export async function getAllProducts() {
   const query_text = /* sql */ `
   SELECT products.*, categories.category, brands.brand 
   FROM products
@@ -11,12 +11,12 @@ async function getAllProducts() {
     .then((products) => products.rows)
 }
 
-async function getAllCategories() {
+export async function getAllCategories() {
   const query_text = /* sql */ `
-  SELECT * FROM categories`;
+  SELECT * FROM categories;`
   return await db
     .query(query_text)
-    .then((categories) => categories.rows)
+    .then((categories) => console.log('////', categories))
 }
 
-export { getAllProducts, getAllCategories }
+// export { getAllProducts, getAllCategories }
