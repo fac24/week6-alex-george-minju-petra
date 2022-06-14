@@ -64,7 +64,7 @@ export default function Products({ productData }) {
         <p>{productData.category}</p>
       </section>
       <Link href="/">
-        <a>Back to Home</a>
+        <a>Back To Home</a>
       </Link>
     </Layout>
   );
