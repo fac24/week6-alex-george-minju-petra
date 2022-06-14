@@ -11,4 +11,12 @@ async function getAllProducts() {
     .then((products) => products.rows)
 }
 
-export { getAllProducts }
+async function getAllCategories() {
+  const query_text = /* sql */ `
+  SELECT * FROM categories`;
+  return await db
+    .query(query_text)
+    .then((categories) => categories.rows)
+}
+
+export { getAllProducts, getAllCategories }

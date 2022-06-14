@@ -18,10 +18,10 @@ export async function getServerSideProps() {
 export default function Home({ allProducts }) {
   return (
     <Layout>
-      <Filter></Filter>
+
       <div>
         <h2>Products</h2>
-        form
+        <Filter />
         <ul>
           {allProducts.map((product) => (<li key={product.id}>
             <Image
