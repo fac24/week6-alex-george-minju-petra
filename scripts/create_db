@@ -1,0 +1,3 @@
+DB_URL="postgres://vxmhmcot:Ge2yWavktypWqRpVgpv4r3lvl9NiGyFv@tyke.db.elephantsql.com/vxmhmcot"
+echo "DATABASE_URL='${DB_URL}'" > "../.env.local"
+echo "Created .env.local containing DATABASE_URL"
