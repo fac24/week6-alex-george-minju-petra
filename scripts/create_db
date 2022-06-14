@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #! /bin/sh
 
 # stop script when an error occurs
@@ -16,10 +15,5 @@ psql -q -c "CREATE DATABASE ${DB_NAME} WITH OWNER ${DB_NAME}user"
 echo "Created Postgres database '${DB_NAME}'"
 
 DB_URL="postgres://${DB_NAME}user:pass123@localhost:5432/${DB_NAME}"
-echo "DATABASE_URL='${DB_URL}'" > .env
+echo "DATABASE_URL='${DB_URL}'" > .env.local
 echo "Created .env containing DATABASE_URL"
-=======
-DB_URL="postgres://vxmhmcot:Ge2yWavktypWqRpVgpv4r3lvl9NiGyFv@tyke.db.elephantsql.com/vxmhmcot"
-echo "DATABASE_URL='${DB_URL}'" > "./.env.local"
-echo "Created .env.local containing DATABASE_URL"
->>>>>>> main

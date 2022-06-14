@@ -7,11 +7,7 @@
 set -e
 
 # import .env so we can access DB URL
-<<<<<<< HEAD
-. .env
-=======
 . "./.env.local"
->>>>>>> main
 
 psql $DATABASE_URL -q -f "./database/init.sql"
 echo "Populated database tables"
