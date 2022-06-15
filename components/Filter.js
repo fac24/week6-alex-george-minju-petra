@@ -1,11 +1,11 @@
 import React from "react";
 
-export default function Filter({ allCategories, category, setCategory }) {
+export default function Filter({ allCategories, category, setCategory, setText }) {
   return (
     <form>
       <fieldset>
         <label htmlFor="search">Search by name:</label>
-        <input type="search" id="search" />
+        <input type="search" id="search" onChange={(event) => setText(event.target.value)} />
       </fieldset>
       <fieldset>
         <label htmlFor="category">choose a category:</label>

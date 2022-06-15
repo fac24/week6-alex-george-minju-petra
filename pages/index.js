@@ -20,6 +20,7 @@ export async function getServerSideProps() {
 
 export default function Home({ allProducts, allCategories }) {
   const [category, setCategory] = useState("all");
+  const [text, setText] = useState("");
   console.log(category);
   return (
     <Layout>
@@ -29,9 +30,14 @@ export default function Home({ allProducts, allCategories }) {
           allCategories={allCategories}
           category={category}
           setCategory={setCategory}
+          text={text}
+          setText={setText}
         />
         <ul>
           {allProducts
+            .filter(
+              (product) => text === '' || product.name.toLowerCase().includes(text.toLowerCase())
+            )
             .filter(
               (product) => category === "all" || product.category === category
             )
