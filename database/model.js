@@ -6,8 +6,13 @@ async function getAllProducts() {
   FROM products
   INNER JOIN categories ON categories.id=products.category_id
   INNER JOIN brands ON brands.id = products.brand_id`;
-  const query_data = await db.query(QUERY_TEXT);
-  return query_data.rows;
+  return await db.query(QUERY_TEXT).then((products) => products.rows);
+}
+
+async function getAllCategories() {
+  const query_text = /* sql */ `
+  SELECT category FROM categories;`;
+  return await db.query(query_text).then((categories) => categories.rows);
 }
 
 async function getProductById(id) {
@@ -33,4 +38,4 @@ async function getAllProductIds() {
   });
 }
 
-export { getAllProducts, getAllProductIds, getProductById };
+export { getAllProducts, getAllProductIds, getProductById, getAllCategories };

@@ -16,4 +16,4 @@ echo "Created Postgres database '${DB_NAME}'"
 
 DB_URL="postgres://${DB_NAME}user:pass123@localhost:5432/${DB_NAME}"
 echo "DATABASE_URL='${DB_URL}'" > .env.local
-echo "Created .env containing DATABASE_URL"
+echo "Created .env.local containing DATABASE_URL"
