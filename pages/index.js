@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Filter from "../components/Filter";
+import Link from "next/link";
 import { getAllProducts } from "../database/model";
 import { getAllCategories } from "../database/model.js";
 
@@ -53,15 +54,21 @@ export default function Home({ allProducts, allCategories }) {
             })
             .map((product) => (
               <li key={product.id}>
-                <Image
-                  src={product.photo_url}
-                  alt=""
-                  width={100}
-                  height={100}
-                />
-                <h3 className="index-product-h3">{product.name}</h3>
+                <Link href={`products/${product.id}`}>
+                  <a>
+                    <Image
+                      src={product.photo_url}
+                      alt=""
+                      width={100}
+                      height={100}
+                    />
+                    <h3 className="index-product-h3">{product.name}</h3>
+                  </a>
+                </Link>
                 <p className="index-product-price">£{product.price}</p>
                 <button>Add to basket</button>
+
+
               </li>
             ))}
         </ul>
