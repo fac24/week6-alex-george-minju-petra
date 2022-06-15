@@ -5,6 +5,8 @@ import styles from "../styles/Home.module.css";
 import Filter from "../components/Filter";
 import { getAllProducts } from "../database/model";
 import { getAllCategories } from "../database/model.js";
+import Link from "next/link";
+import indexImg from "../public/assets/sectech.png";
 
 export async function getServerSideProps() {
   const allProducts = await getAllProducts();
@@ -23,31 +25,89 @@ export default function Home({ allProducts, allCategories }) {
   console.log(category);
   return (
     <Layout>
-      <div>
-        <h2>Products</h2>
+      <div className=" container flex flex-row mt-17 h-100 mx-auto p-5 justify-between alig ">
+        <div className="w-2/5 flex flex-col justify-center ml-20">
+          <h2 className="text-4xl text-gray-600  md:text-left mb-6 mt-10">
+            SecTech
+          </h2>
+          <p className="uppercase text-gray-600 tracking-wide md:text-left">
+            Shop more sustainably with second-hand electronic devices from your
+            favourite brands.
+          </p>
+          <Link href="/">
+            <button className=" bg-purple-200 rounded-full p-3 hover:bg-purple-400 py-4 px-8 uppercase text-m self-start mt-12">
+              Shop now
+            </button>
+          </Link>
+        </div>
+        <div className="w-3/5 ml-24">
+          <Image src={indexImg} alt="" width={500} height={400} />
+        </div>
+      </div>
+
+      <div className=" container mt-17 mx-auto p-5">
+        <h2 className="text-3xl">Products</h2>
         <Filter
           allCategories={allCategories}
           category={category}
           setCategory={setCategory}
         />
-        <ul>
+        <ul className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-16">
           {allProducts
             .filter(
               (product) => category === "all" || product.category === category
             )
-            .map((product) => (
-              <li key={product.id}>
-                <Image
-                  src={product.photo_url}
-                  alt=""
-                  width={100}
-                  height={100}
-                />
-                <h3 className="index-product-h3">{product.name}</h3>
-                <p className="index-product-price">£{product.price}</p>
-                <button>Add to basket</button>
-              </li>
-            ))}
+            .map((product) => {
+              const href = `/products/${product.id}`;
+              return (
+                <li
+                  key={product.id}
+                  className="shadow-lg rounded-lg p-5 flex flex-col"
+                >
+                  <Image
+                    src={product.photo_url}
+                    alt=""
+                    width={200}
+                    height={300}
+                    className="rounded-lg"
+                  />
+
+                  <a
+                    href={href}
+                    className="index-product-h3 text-lg font-semibold text-gray-700 pt-3 pb-5"
+                  >
+                    {product.name}
+                  </a>
+                  <div className="flex flex-row justify-between">
+                    <p className="index-product-price font-semibold inline-block mr-2 text-gray-700 text-base">
+                      £{product.price}
+                    </p>
+
+                    <div className="flex flex-row bg-purple-200 rounded-full p-4 hover:bg-purple-400">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4 inline-block mr-2 text-gray-700"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                        />
+                      </svg>
+                      <Link href="/">
+                        <a className="text-gray-700 mr-2 ml-1 text-xs font-semibold">
+                          Add To Cart
+                        </a>
+                      </Link>
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
         </ul>
       </div>
     </Layout>
