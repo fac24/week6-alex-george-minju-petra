@@ -3,8 +3,10 @@ export default function Colours(props) {
 
   return (
     <>
-      <label htmlFor="colours">Select colour:</label>
-      <select name="colours" id="colours">
+      <label htmlFor="colours" className="text-lg py-4">
+        Select colour:
+      </label>
+      <select name="colours" id="colours" className="indent-4 md:indent-0">
         {colours.map((colour) => {
           return (
             <option value={colour} key={colour}>
