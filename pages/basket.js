@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
 import { getAllProducts } from "../database/model";
-import useLocalStorage from "../components/hooks/useLocalStorage.js";
+import useLocalArray from "../components/hooks/useLocalArray.js";
 
 export async function getServerSideProps() {
     const allProducts = await getAllProducts();
@@ -12,7 +12,9 @@ export async function getServerSideProps() {
 }
 
 export default function Basket() {
-    const [basket, setBasket] = useLocalStorage("basket")
+    const [basket, setBasket] = useLocalArray("basket")
+
+
     return (
         <Layout>
 
