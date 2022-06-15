@@ -21,6 +21,7 @@ export async function getServerSideProps() {
 export default function Home({ allProducts, allCategories }) {
   const [category, setCategory] = useState("all");
   const [text, setText] = useState("");
+  const [sortPrice, setSortPrice] = useState("highest")
   console.log(category);
   return (
     <Layout>
@@ -32,6 +33,8 @@ export default function Home({ allProducts, allCategories }) {
           setCategory={setCategory}
           text={text}
           setText={setText}
+          sortPrice={sortPrice}
+          setSortPrice={setSortPrice}
         />
         <ul>
           {allProducts
@@ -41,6 +44,13 @@ export default function Home({ allProducts, allCategories }) {
             .filter(
               (product) => category === "all" || product.category === category
             )
+            .sort((productA, productB) => {
+              if (sortPrice === "highest") {
+                return productB.price - productA.price
+              } else if (sortPrice === "lowest") {
+                return productA.price - productB.price
+              }
+            })
             .map((product) => (
               <li key={product.id}>
                 <Image

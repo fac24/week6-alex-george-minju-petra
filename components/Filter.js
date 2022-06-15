@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Filter({ allCategories, category, setCategory, setText }) {
+export default function Filter({ allCategories, setCategory, setText, setSortPrice }) {
   return (
     <form>
       <fieldset>
@@ -26,9 +26,9 @@ export default function Filter({ allCategories, category, setCategory, setText }
       </fieldset>
       <fieldset>
         <label htmlFor="price">Sort by price:</label>
-        <select name="price" id="price">
+        <select name="price" id="price" onChange={(event) => setSortPrice(event.target.value)}>
           <option value="highest">Highest Price</option>
-          <option value="phone">Lowest Price</option>
+          <option value="lowest">Lowest Price</option>
         </select>
       </fieldset>
     </form>
