@@ -10,7 +10,6 @@ import { getAllCategories } from "../database/model.js";
 export async function getServerSideProps() {
   const allProducts = await getAllProducts();
   const allCategories = await getAllCategories();
-  //if line 9 was a db request or something, it would need an await
   return {
     props: {
       allProducts,
