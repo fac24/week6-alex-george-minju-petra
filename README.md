@@ -7,7 +7,15 @@ First, install the packages:
 npm install
 ```
 
-Second, run the development server:
+Second, run the scripts:
+```bash
+./scripts/create_db sectech
+
+./scripts/populate_db
+
+```
+
+Lastly, run the development server:
 
 ```bash
 npm run dev
