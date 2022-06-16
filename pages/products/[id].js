@@ -98,7 +98,7 @@ export default function Products({
           </form>
         </div>
       </section>
-      <section className="container m-auto p-10 pt-2">
+      <section className="container m-auto p-10 pt-2 flex flex-col gap-4">
         <div className="flex flex-col gap-4">
           <h2 className="text-xl">Description:</h2>
           <p className="indent-2 px-4"> {productData.description}</p>
@@ -107,10 +107,10 @@ export default function Products({
           <h2 className="text-xl">Category:</h2>
           <p className="indent-2 px-4">{productData.category}</p>
         </div>
+        <Link href="/">
+          <a className="text-xl mt-4"> 🔙 Back To Home</a>
+        </Link>
       </section>
-      <Link href="/">
-        <a>Back To Home</a>
-      </Link>
     </Layout>
   );
 }
