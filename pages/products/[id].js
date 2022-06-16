@@ -3,6 +3,7 @@ import Layout from "../../components/Layout.js";
 import Image from "next/image";
 import Colours from "../../components/Colours.js";
 import Variants from "../../components/Variants.js";
+import AddBasketButton from "../../components/addBasketButton.js";
 import Link from "next/link.js";
 import { useState } from "react";
 
@@ -24,10 +25,18 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export default function Products({ productData, basket, setBasket }) {
+export default function Products({
+  productData,
+  cartTotal,
+  setCartTotal,
+  basket,
+  setBasket,
+}) {
   const [quantity, setQuantity] = useState(1);
   function addToBasket(event) {
     event.preventDefault();
+    let nrOfItems = parseInt(event.target.querySelector("#quantity").value);
+    setCartTotal(cartTotal + nrOfItems);
     const data = new FormData(event.target);
     const productObj = Object.fromEntries(data.entries());
     productObj.pid = productData;
@@ -39,7 +48,7 @@ export default function Products({ productData, basket, setBasket }) {
   }
 
   return (
-    <Layout>
+    <Layout basket={basket} cartTotal={cartTotal} setCartTotal={setCartTotal}>
       <section className="container m-auto mt-5 p-10 pb-2">
         <div className="flex flex-row">
           <Image
@@ -81,12 +90,10 @@ export default function Products({ productData, basket, setBasket }) {
               onChange={(event) => setQuantity(event.target.value)}
             />
             {basket ? (
-              <button
-                className="bg-purple-200 text-xl rounded-full p-4 hover:bg-purple-400 mt-2 md:text-md"
-                type="submit"
-              >
-                Add to basket
-              </button>
+              <AddBasketButton
+                cartTotal={cartTotal}
+                setCartTotal={setCartTotal}
+              />
             ) : null}
           </form>
         </div>

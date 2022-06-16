@@ -9,6 +9,8 @@ export default function BasketItem({
   basketIndex,
   totalPrice,
   setTotalPrice,
+  cartTotal,
+  setCartTotal,
 }) {
   const [quantity, setQuantity] = useState(product.quantity);
 
@@ -33,6 +35,7 @@ export default function BasketItem({
 
     setBasket(basket);
     setQuantity(event.target.value);
+    setCartTotal(event.target.value);
     setTotalPrice((totalPrice - oldPrice + newPrice).toFixed(2));
   }
 
@@ -41,7 +44,7 @@ export default function BasketItem({
     const indexToRemove = basket.findIndex(
       (item) => item.pid.id === +event.target.attributes.pid.value
     );
-
+    setCartTotal(cartTotal - quantity);
     setBasket(basket.filter((_, index) => index !== indexToRemove));
   }
 
