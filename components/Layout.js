@@ -35,48 +35,42 @@ export default function Layout({ children }) {
                 Home
               </a>
             </Link>
-            <div className="flex flex-row bg-purple-200 rounded-full p-4 hover:bg-purple-400 ">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 inline-block mr-2 text-gray-700"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                />
-              </svg>
-              <Link href="/basket">
-                <a className="text-gray-700 mr-2 ml-1 text-xl font-medium">
+            <Link href="/basket">
+              <div className="flex flex-row bg-purple-200 rounded-full p-4 hover:bg-purple-400 cursor-pointer">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 inline-block mr-2 text-gray-700"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                  />
+                </svg>
+                <button className="text-gray-700 mr-2 ml-1 text-xl font-medium">
                   Basket
-                </a>
-              </Link>
-            </div>
+                </button>
+              </div>
+            </Link>
           </div>
         </div>
       </header>
       <main>{children}</main>
-      <footer className="mt-10  bg-blue-200 container h-40 mx-auto p-5 flex flex-row justify-evenly text-gray-700 text-lg">
-        <ul>
-          <li>SetTech</li>
-          <li>Founders</li>
-          <li>Community</li>
-          <li>Customer Service</li>
+      <footer className="max-w-xl md:max-w-4xl border-t-2 border-solid border-purple-200 mt-20 p-20   container mx-auto flex flex-col justify-evenly items-center text-gray-700 md:text-md  gap-y-4 md:gap-x-6 ">
+        <ul className="flex flex-col gap-y-4 md:flex-row md:gap-x-6">
+          <li>Contact us</li>
+          <li>F.A.Q</li>
+          <li>Cookies policy</li>
+          <li>Legal terms</li>
+          <li>Privacy policy</li>
+          <li>English 🇬🇧</li>
         </ul>
-        <div>
-          <span>K</span>
-          <ul>
-            <li></li>
-            <li>s</li>
-            <li>ty</li>
-            <li>r Service</li>
-          </ul>
-        </div>
         <p>All rights reserved.</p>
+        <p className="text-sm">Copyright © 2022 FAC24 Week6-Group3</p>
       </footer>
     </div>
   );

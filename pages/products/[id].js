@@ -82,7 +82,7 @@ export default function Products({ productData, basket, setBasket }) {
             />
             {basket ? (
               <button
-                className="bg-purple-200 text-xl rounded-full p-4 hover:bg-purple-400 mt-2"
+                className="bg-purple-200 text-xl rounded-full p-4 hover:bg-purple-400 mt-2 md:text-md"
                 type="submit"
               >
                 Add to basket
@@ -91,7 +91,7 @@ export default function Products({ productData, basket, setBasket }) {
           </form>
         </div>
       </section>
-      <section className="container m-auto p-10 pt-2">
+      <section className="container m-auto p-10 pt-2 flex flex-col gap-4">
         <div className="flex flex-col gap-4">
           <h2 className="text-xl">Description:</h2>
           <p className="indent-2 px-4"> {productData.description}</p>
@@ -100,10 +100,10 @@ export default function Products({ productData, basket, setBasket }) {
           <h2 className="text-xl">Category:</h2>
           <p className="indent-2 px-4">{productData.category}</p>
         </div>
+        <Link href="/">
+          <a className="text-xl mt-4"> 🔙 Back To Home</a>
+        </Link>
       </section>
-      <Link href="/">
-        <a>Back To Home</a>
-      </Link>
     </Layout>
   );
 }
