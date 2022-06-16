@@ -23,7 +23,7 @@ export default function Home({ allProducts, allCategories }) {
   const [category, setCategory] = useState("all");
   const [text, setText] = useState("");
   const [sortPrice, setSortPrice] = useState("highest");
-  console.log(category);
+
   return (
     <Layout>
       <div className=" container flex flex-row mt-17 h-100 mx-auto p-5 justify-between">

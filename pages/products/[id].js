@@ -5,8 +5,7 @@ import Colours from "../../components/Colours.js";
 import Variants from "../../components/Variants.js";
 import AddBasketButton from "../../components/addBasketButton.js";
 import Link from "next/link.js";
-import useLocalArray from "../../components/hooks/useLocalArray.js";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export async function getStaticPaths() {
   const paths = await getAllProductIds();
@@ -26,22 +25,25 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export default function Products({ productData, cartTotal, setCartTotal }) {
-  const [basket, setBasket] = useLocalArray("basket");
-
+export default function Products({
+  productData,
+  cartTotal,
+  setCartTotal,
+  basket,
+  setBasket,
+}) {
+  const [quantity, setQuantity] = useState(1);
   function addToBasket(event) {
     event.preventDefault();
     setCartTotal(cartTotal + 1);
     const data = new FormData(event.target);
     const productObj = Object.fromEntries(data.entries());
-    productObj.pid = event.target.attributes.pid.value;
+    productObj.pid = productData;
+    productObj.totalPrice = (
+      productObj.pid.price * productObj.quantity
+    ).toFixed(2);
 
-    const newBasket = [...basket, productObj];
-    localStorage.setItem(
-      "basket",
-      newBasket.map((object) => JSON.stringify(object)).join(",,")
-    );
-    setBasket(newBasket);
+    setBasket([...basket, productObj]);
   }
 
   return (
@@ -82,8 +84,9 @@ export default function Products({ productData, cartTotal, setCartTotal }) {
               name="quantity"
               min="1"
               max={productData.stock}
-              value="1"
+              value={quantity}
               className="indent-4 md:indent-0"
+              onChange={(event) => setQuantity(event.target.value)}
             />
             {basket ? (
               <AddBasketButton
