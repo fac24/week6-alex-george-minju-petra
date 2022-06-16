@@ -1,27 +1,50 @@
 import Layout from "../components/Layout";
-import { getAllProducts } from "../database/model";
-import useLocalArray from "../components/hooks/useLocalArray.js";
 
-export async function getServerSideProps() {
-    const allProducts = await getAllProducts();
-    return {
-        props: {
-            allProducts,
-        },
-    };
+import { useState, useEffect } from "react";
+import BasketItem from "../components/BasketItem.js";
+
+export default function Basket({ basket, setBasket }) {
+  const [totalPrice, setTotalPrice] = useState(0);
+  useEffect(() => {
+    setTotalPrice(
+      basket
+        .reduce((acc, product) => acc + parseFloat(product.totalPrice), 0)
+        .toFixed(2)
+    );
+  }, [basket]);
+
+  return (
+    <Layout>
+      <div className="container flex flex-col m-auto mt-6 p-10 pb-2 gap-10">
+        {basket.map((product, index) => {
+          return (
+            <BasketItem
+              product={product}
+              basket={basket}
+              setBasket={setBasket}
+              basketIndex={index}
+              totalPrice={totalPrice}
+              setTotalPrice={setTotalPrice}
+              key={index}
+            />
+          );
+        })}
+        <div className="container m-auto p-10 flex flex-col justify-center items-center gap-4">
+          <span className="text-4xl">Total price: £{totalPrice}</span>
+          <button
+            type="submit"
+            className="text-2xl bg-purple-200 rounded-full mx-6 p-4 h-15 w-full hover:bg-purple-400"
+          >
+            💸 Checkout
+          </button>
+        </div>
+      </div>
+    </Layout>
+  );
 }
 
-export default function Basket() {
-    const [basket, setBasket] = useLocalArray("basket")
-
-
-    return (
-        <Layout>
-
-        </Layout>
-    )
-}
-
-//number, variant, colour, price, name
+//image, quantity, variant, colour, price, name
 
 // total price, checkout
+
+// {colours: #colour_of_item, variants: #variant_of_item, quantity: #number_ordered, pid: {name, id, cat_id, stock,}}
