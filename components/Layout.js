@@ -60,23 +60,17 @@ export default function Layout({ children }) {
         </div>
       </header>
       <main>{children}</main>
-      <footer className="mt-10  bg-blue-200 container h-40 mx-auto p-5 flex flex-row justify-evenly text-gray-700 text-lg">
-        <ul>
-          <li>SetTech</li>
-          <li>Founders</li>
-          <li>Community</li>
-          <li>Customer Service</li>
+      <footer className="max-w-xl md:max-w-4xl border-t-2 border-solid border-purple-200 mt-20 p-20   container mx-auto flex flex-col justify-evenly items-center text-gray-700 md:text-md  gap-y-4 md:gap-x-6 ">
+        <ul className="flex flex-col gap-y-4 md:flex-row md:gap-x-6">
+          <li>Contact us</li>
+          <li>F.A.Q</li>
+          <li>Cookies policy</li>
+          <li>Legal terms</li>
+          <li>Privacy policy</li>
+          <li>English 🇬🇧</li>
         </ul>
-        <div>
-          <span>K</span>
-          <ul>
-            <li></li>
-            <li>s</li>
-            <li>ty</li>
-            <li>r Service</li>
-          </ul>
-        </div>
         <p>All rights reserved.</p>
+        <p className="text-sm">Copyright © 2022 FAC24 Week6-Group3</p>
       </footer>
     </div>
   );
