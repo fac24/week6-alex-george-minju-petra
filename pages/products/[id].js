@@ -3,7 +3,7 @@ import Layout from "../../components/Layout.js";
 import Image from "next/image";
 import Colours from "../../components/Colours.js";
 import Variants from "../../components/Variants.js";
-import AddBasketButton from "../../components/addBasketButton.js";
+import AddBasketButton from "../../components/AddBasketButton.js";
 import Link from "next/link.js";
 import { useState } from "react";
 
