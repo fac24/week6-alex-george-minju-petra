@@ -6,6 +6,7 @@ import Filter from "../components/Filter";
 import Link from "next/link";
 import { getAllProducts } from "../database/model";
 import { getAllCategories } from "../database/model.js";
+import indexImg from "../public/assets/sectech.png";
 
 export async function getServerSideProps() {
   const allProducts = await getAllProducts();
@@ -21,12 +22,34 @@ export async function getServerSideProps() {
 export default function Home({ allProducts, allCategories }) {
   const [category, setCategory] = useState("all");
   const [text, setText] = useState("");
-  const [sortPrice, setSortPrice] = useState("highest")
+  const [sortPrice, setSortPrice] = useState("highest");
   console.log(category);
   return (
     <Layout>
-      <div>
-        <h2>Products</h2>
+      <div className=" container flex flex-row mt-17 h-100 mx-auto p-5 justify-between">
+        <div className="w-2/5 flex flex-col justify-center ml-20">
+          <h2 className="text-4xl text-gray-600  md:text-left mb-6 mt-10 font-medium">
+            SecTech
+          </h2>
+          <p className="uppercase text-gray-600 tracking-wide md:text-left">
+            Shop more sustainably with second-hand electronic devices from your
+            favourite brands.
+          </p>
+          <Link href="/">
+            <button className=" rounded-full bg-blue-200 p-3 hover:bg-purple-400 py-4 px-8 uppercase text-sm self-start mt-12 font-medium">
+              Shop now
+            </button>
+          </Link>
+        </div>
+        <div className="w-3/5 ml-24">
+          <Image src={indexImg} alt="" width={500} height={400} />
+        </div>
+      </div>
+
+      <div className=" container mt-17 mx-auto p-5">
+        <h2 className="text-3xl text-gray-600 mb-4 mt-4 font-medium">
+          Products
+        </h2>
         <Filter
           allCategories={allCategories}
           category={category}
@@ -36,40 +59,74 @@ export default function Home({ allProducts, allCategories }) {
           sortPrice={sortPrice}
           setSortPrice={setSortPrice}
         />
-        <ul>
+        <ul className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-16">
           {allProducts
             .filter(
-              (product) => text === '' || product.name.toLowerCase().includes(text.toLowerCase())
+              (product) =>
+                text === "" ||
+                product.name.toLowerCase().includes(text.toLowerCase())
             )
             .filter(
               (product) => category === "all" || product.category === category
             )
             .sort((productA, productB) => {
               if (sortPrice === "highest") {
-                return productB.price - productA.price
+                return productB.price - productA.price;
               } else if (sortPrice === "lowest") {
-                return productA.price - productB.price
+                return productA.price - productB.price;
               }
             })
-            .map((product) => (
-              <li key={product.id}>
-                <Link href={`products/${product.id}`}>
-                  <a>
-                    <Image
-                      src={product.photo_url}
-                      alt=""
-                      width={100}
-                      height={100}
-                    />
-                    <h3 className="index-product-h3">{product.name}</h3>
-                  </a>
-                </Link>
-                <p className="index-product-price">£{product.price}</p>
-                <button>Add to basket</button>
+            .map((product) => {
+              const href = `/products/${product.id}`;
+              return (
+                <li
+                  key={product.id}
+                  className="shadow-md rounded-lg p-5 flex flex-col"
+                >
+                  <Link href={href}>
+                    <a>
+                      <Image
+                        src={product.photo_url}
+                        alt=""
+                        width={300}
+                        height={300}
+                        className="rounded-lg self-center"
+                      />
+                      <p className="index-product-h3 text-lg font-semibold text-gray-700 pt-3 pb-5 mt-3 mb-2">
+                        {product.name}{" "}
+                      </p>
+                    </a>
+                  </Link>
+                  <div className="flex flex-row justify-between content-center h-15">
+                    <p className="index-product-price font-semibold inline-block mr-2 text-gray-700 text-base py-2 ">
+                      £{product.price}
+                    </p>
 
-
-              </li>
-            ))}
+                    <div className="flex flex-row bg-purple-200 rounded-full p-4 hover:bg-purple-400">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4 inline-block mr-2 text-gray-700"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                        />
+                      </svg>
+                      <Link href="/">
+                        <a className="text-gray-700 mr-2 ml-1 text-xs font-semibold">
+                          Add To Cart
+                        </a>
+                      </Link>
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
         </ul>
       </div>
     </Layout>

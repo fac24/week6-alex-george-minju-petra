@@ -3,8 +3,10 @@ export default function Variants(props) {
 
   return (
     <>
-      <label htmlFor="variants">Select {variantType}: </label>
-      <select name="variants" id="variants">
+      <label htmlFor="variants" className="text-lg py-4">
+        Select {variantType}:{" "}
+      </label>
+      <select name="variants" id="variants" className="indent-4 md:indent-0">
         {variants.map((variant) => {
           return (
             <option value={variant} key={variant}>
