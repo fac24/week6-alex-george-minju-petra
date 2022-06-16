@@ -1,13 +1,23 @@
 import { useState, useEffect } from "react";
 
 export default function useLocalArray(key) {
-    const [localStore, setLocalStore] = useState(null);
+  const [localStore, setLocalStore] = useState([]);
 
-    useEffect(() => {
-        const local = localStorage.getItem(key)
-        const localArray = local ? local.split(",,").map((string, index) => JSON.parse(string)) : [];
-        setLocalStore(localArray);
-    }, [key]);
+  useEffect(() => {
+    const local = localStorage.getItem(key);
+    const localArray = local
+      ? local.split(",,").map((string) => JSON.parse(string))
+      : [];
+    setLocalStore(localArray);
+  }, [key]);
 
-    return [localStore, setLocalStore];
+  function setBasket(newBasket) {
+    localStorage.setItem(
+      "basket",
+      newBasket.map((object) => JSON.stringify(object)).join(",,")
+    );
+    setLocalStore(newBasket);
+  }
+
+  return [localStore, setBasket];
 }
