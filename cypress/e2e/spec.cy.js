@@ -42,6 +42,5 @@ describe('Product tests', () => {
       })
     cy.clearLocalStorage();
   })
-
 })
 
