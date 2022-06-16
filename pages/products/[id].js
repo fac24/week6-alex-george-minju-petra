@@ -35,7 +35,8 @@ export default function Products({
   const [quantity, setQuantity] = useState(1);
   function addToBasket(event) {
     event.preventDefault();
-    setCartTotal(cartTotal + 1);
+    let nrOfItems = parseInt(event.target.querySelector("#quantity").value);
+    setCartTotal(cartTotal + nrOfItems);
     const data = new FormData(event.target);
     const productObj = Object.fromEntries(data.entries());
     productObj.pid = productData;
@@ -47,7 +48,7 @@ export default function Products({
   }
 
   return (
-    <Layout>
+    <Layout basket={basket} cartTotal={cartTotal} setCartTotal={setCartTotal}>
       <section className="container m-auto mt-5 p-10 pb-2">
         <div className="flex flex-row">
           <Image

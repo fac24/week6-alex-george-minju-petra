@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import AddBasketButton from "./addBasketButton";
 
-export default function Header({ cartTotal, setCartTotal }) {
+export default function Header({ cartTotal, setCartTotal, basket }) {
   useEffect(() => {
     const getCart = localStorage.getItem("basket");
     const cart = getCart
@@ -61,7 +61,7 @@ export default function Header({ cartTotal, setCartTotal }) {
                 d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
               />
             </svg>
-            <Link href="/">
+            <Link href="/basket">
               <a className="text-gray-700 mr-2 ml-1 text-xl font-medium">
                 Cart (<span>{cartTotal}</span>)
               </a>

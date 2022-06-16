@@ -4,14 +4,17 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import Header from "./Header";
 
-export default function Layout({ children }) {
-  const [cartTotal, setCartTotal] = useState(0);
+export default function Layout({ children, basket, cartTotal, setCartTotal }) {
   return (
     <div>
       <Head>
         <title>SecTech </title>
       </Head>
-      <Header cartTotal={cartTotal} setCartTotal={setCartTotal} />
+      <Header
+        cartTotal={cartTotal}
+        setCartTotal={setCartTotal}
+        basket={basket}
+      />
       <main>{children}</main>
       <footer className="mt-10  bg-blue-200 container h-40 mx-auto p-5 flex flex-row justify-evenly text-gray-700 text-lg">
         <ul>

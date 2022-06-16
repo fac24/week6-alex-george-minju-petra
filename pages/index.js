@@ -19,13 +19,19 @@ export async function getServerSideProps() {
   };
 }
 
-export default function Home({ allProducts, allCategories }) {
+export default function Home({
+  allProducts,
+  allCategories,
+  basket,
+  setCartTotal,
+  cartTotal,
+}) {
   const [category, setCategory] = useState("all");
   const [text, setText] = useState("");
   const [sortPrice, setSortPrice] = useState("highest");
 
   return (
-    <Layout>
+    <Layout basket={basket} cartTotal={cartTotal} setCartTotal={setCartTotal}>
       <div className=" container flex flex-row mt-17 h-100 mx-auto p-5 justify-between">
         <div className="w-2/5 flex flex-col justify-center ml-20">
           <h2 className="text-4xl text-gray-600  md:text-left mb-6 mt-10 font-medium">
