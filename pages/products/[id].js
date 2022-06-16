@@ -34,8 +34,7 @@ export default function Products({ productData }) {
     productObj.pid = event.target.attributes.pid.value
 
     const newBasket = [...basket, productObj];
-    console.log(newBasket.map((object) => JSON.stringify(object)).join(',,'))
-    localStorage.setItem("basket", newBasket.map((object) => JSON.stringify(object)).toString())
+    localStorage.setItem("basket", newBasket.map((object) => JSON.stringify(object)).join(',,'))
     setBasket(newBasket)
 
 
