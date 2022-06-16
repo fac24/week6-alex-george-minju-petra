@@ -3,15 +3,14 @@ import Layout from "../components/Layout";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Filter from "../components/Filter";
+import Link from "next/link";
 import { getAllProducts } from "../database/model";
 import { getAllCategories } from "../database/model.js";
-import Link from "next/link";
 import indexImg from "../public/assets/sectech.png";
 
 export async function getServerSideProps() {
   const allProducts = await getAllProducts();
   const allCategories = await getAllCategories();
-  //if line 9 was a db request or something, it would need an await
   return {
     props: {
       allProducts,
@@ -22,6 +21,8 @@ export async function getServerSideProps() {
 
 export default function Home({ allProducts, allCategories }) {
   const [category, setCategory] = useState("all");
+  const [text, setText] = useState("");
+  const [sortPrice, setSortPrice] = useState("highest");
   console.log(category);
   return (
     <Layout>
@@ -53,12 +54,28 @@ export default function Home({ allProducts, allCategories }) {
           allCategories={allCategories}
           category={category}
           setCategory={setCategory}
+          text={text}
+          setText={setText}
+          sortPrice={sortPrice}
+          setSortPrice={setSortPrice}
         />
         <ul className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-16">
           {allProducts
             .filter(
+              (product) =>
+                text === "" ||
+                product.name.toLowerCase().includes(text.toLowerCase())
+            )
+            .filter(
               (product) => category === "all" || product.category === category
             )
+            .sort((productA, productB) => {
+              if (sortPrice === "highest") {
+                return productB.price - productA.price;
+              } else if (sortPrice === "lowest") {
+                return productA.price - productB.price;
+              }
+            })
             .map((product) => {
               const href = `/products/${product.id}`;
               return (
@@ -66,20 +83,20 @@ export default function Home({ allProducts, allCategories }) {
                   key={product.id}
                   className="shadow-md rounded-lg p-5 flex flex-col"
                 >
-                  <Image
-                    src={product.photo_url}
-                    alt=""
-                    width={200}
-                    height={300}
-                    className="rounded-lg"
-                  />
-
-                  <a
-                    href={href}
-                    className="index-product-h3 text-lg font-semibold text-gray-700 pt-3 pb-5 mt-3 mb-2"
-                  >
-                    {product.name}
-                  </a>
+                  <Link href={href}>
+                    <a>
+                      <Image
+                        src={product.photo_url}
+                        alt=""
+                        width={300}
+                        height={300}
+                        className="rounded-lg self-center"
+                      />
+                      <p className="index-product-h3 text-lg font-semibold text-gray-700 pt-3 pb-5 mt-3 mb-2">
+                        {product.name}{" "}
+                      </p>
+                    </a>
+                  </Link>
                   <div className="flex flex-row justify-between content-center h-15">
                     <p className="index-product-price font-semibold inline-block mr-2 text-gray-700 text-base py-2 ">
                       £{product.price}

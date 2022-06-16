@@ -4,6 +4,7 @@ import Image from "next/image";
 import Colours from "../../components/Colours.js";
 import Variants from "../../components/Variants.js";
 import Link from "next/link.js";
+import useLocalArray from "../../components/hooks/useLocalArray.js";
 
 export async function getStaticPaths() {
   const paths = await getAllProductIds();
@@ -24,7 +25,22 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Products({ productData }) {
-  // console.log(productData);
+  const [basket, setBasket] = useLocalArray("basket");
+
+  function addToBasket(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const productObj = Object.fromEntries(data.entries());
+    productObj.pid = event.target.attributes.pid.value;
+
+    const newBasket = [...basket, productObj];
+    localStorage.setItem(
+      "basket",
+      newBasket.map((object) => JSON.stringify(object)).join(",,")
+    );
+    setBasket(newBasket);
+  }
+
   return (
     <Layout>
       <section className="container m-auto mt-5 p-10 pb-2">
@@ -47,7 +63,11 @@ export default function Products({ productData }) {
           </div>
         </div>
         <div className="m-auto mt-5">
-          <form className=" flex flex-col md:flex-row justify-between gap-4">
+          <form
+            pid={productData.id}
+            onSubmit={(event) => addToBasket(event)}
+            className=" flex flex-col md:flex-row justify-between gap-4"
+          >
             <Colours colours={productData.colours} />
             <Variants variants={productData.variants} />
             <label htmlFor="quantity" className="text-lg py-4">
@@ -62,12 +82,14 @@ export default function Products({ productData }) {
               value="1"
               className="indent-4 md:indent-0"
             />
-            <button
-              className="bg-purple-200 text-xl rounded-full p-4 hover:bg-purple-400 mt-2"
-              type="submit"
-            >
-              Add to basket
-            </button>
+            {basket ? (
+              <button
+                className="bg-purple-200 text-xl rounded-full p-4 hover:bg-purple-400 mt-2"
+                type="submit"
+              >
+                Add to basket
+              </button>
+            ) : null}
           </form>
         </div>
       </section>
