@@ -20,7 +20,10 @@ export default function Layout({ children }) {
               <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" />
             </svg>
             <Link href="/">
-              <h1 className="text-2xl m-auto ml-2 text-gray-600"> SecTech </h1>
+              <h1 className="text-2xl m-auto ml-2 text-gray-600 font-semibold">
+                {" "}
+                SecTech{" "}
+              </h1>
             </Link>
           </div>
           <div className="flex flex-row mt-2">
@@ -28,7 +31,7 @@ export default function Layout({ children }) {
               href="/"
               className="text-gray-600 hover:text-purple-400 text-xl p-4 inline-block"
             >
-              <a className="text-gray-600 hover:text-purple-400 text-xl p-4 inline-block mr-5">
+              <a className="text-gray-600 hover:text-purple-400 text-xl p-4 inline-block mr-5 font-medium">
                 Home
               </a>
             </Link>
@@ -48,14 +51,16 @@ export default function Layout({ children }) {
                 />
               </svg>
               <Link href="/">
-                <a className="text-gray-700 mr-2 ml-1 text-xl ">Cart</a>
+                <a className="text-gray-700 mr-2 ml-1 text-xl font-medium">
+                  Cart
+                </a>
               </Link>
             </div>
           </div>
         </div>
       </header>
       <main>{children}</main>
-      <footer>
+      <footer className="mt-20 bg-blue-200 container h-20 mx-auto p-5 flex flex-row justify-evenly text-gray-700 text-lg">
         <ul>
           <li>Category 1</li>
           <li>Category 2</li>

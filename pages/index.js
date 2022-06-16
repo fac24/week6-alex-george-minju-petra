@@ -25,9 +25,9 @@ export default function Home({ allProducts, allCategories }) {
   console.log(category);
   return (
     <Layout>
-      <div className=" container flex flex-row mt-17 h-100 mx-auto p-5 justify-between alig ">
+      <div className=" container flex flex-row mt-17 h-100 mx-auto p-5 justify-between">
         <div className="w-2/5 flex flex-col justify-center ml-20">
-          <h2 className="text-4xl text-gray-600  md:text-left mb-6 mt-10">
+          <h2 className="text-4xl text-gray-600  md:text-left mb-6 mt-10 font-medium">
             SecTech
           </h2>
           <p className="uppercase text-gray-600 tracking-wide md:text-left">
@@ -35,7 +35,7 @@ export default function Home({ allProducts, allCategories }) {
             favourite brands.
           </p>
           <Link href="/">
-            <button className=" bg-purple-200 rounded-full p-3 hover:bg-purple-400 py-4 px-8 uppercase text-m self-start mt-12">
+            <button className=" rounded-full bg-blue-200 p-3 hover:bg-purple-400 py-4 px-8 uppercase text-sm self-start mt-12 font-medium">
               Shop now
             </button>
           </Link>
@@ -46,7 +46,9 @@ export default function Home({ allProducts, allCategories }) {
       </div>
 
       <div className=" container mt-17 mx-auto p-5">
-        <h2 className="text-3xl">Products</h2>
+        <h2 className="text-3xl text-gray-600 mb-4 mt-4 font-medium">
+          Products
+        </h2>
         <Filter
           allCategories={allCategories}
           category={category}
@@ -62,7 +64,7 @@ export default function Home({ allProducts, allCategories }) {
               return (
                 <li
                   key={product.id}
-                  className="shadow-lg rounded-lg p-5 flex flex-col"
+                  className="shadow-md rounded-lg p-5 flex flex-col"
                 >
                   <Image
                     src={product.photo_url}
@@ -74,12 +76,12 @@ export default function Home({ allProducts, allCategories }) {
 
                   <a
                     href={href}
-                    className="index-product-h3 text-lg font-semibold text-gray-700 pt-3 pb-5"
+                    className="index-product-h3 text-lg font-semibold text-gray-700 pt-3 pb-5 mt-3 mb-2"
                   >
                     {product.name}
                   </a>
-                  <div className="flex flex-row justify-between">
-                    <p className="index-product-price font-semibold inline-block mr-2 text-gray-700 text-base">
+                  <div className="flex flex-row justify-between content-center h-15">
+                    <p className="index-product-price font-semibold inline-block mr-2 text-gray-700 text-base py-2 ">
                       £{product.price}
                     </p>
 
