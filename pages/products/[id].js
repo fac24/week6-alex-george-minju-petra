@@ -4,6 +4,7 @@ import Image from "next/image";
 import Colours from "../../components/Colours.js";
 import Variants from "../../components/Variants.js";
 import Link from "next/link.js";
+import useLocalArray from "../../components/hooks/useLocalArray.js";
 
 export async function getStaticPaths() {
   const paths = await getAllProductIds();
@@ -24,6 +25,22 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Products({ productData }) {
+  const [basket, setBasket] = useLocalArray("basket");
+
+  function addToBasket(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const productObj = Object.fromEntries(data.entries());
+    productObj.pid = event.target.attributes.pid.value
+
+    const newBasket = [...basket, productObj];
+    localStorage.setItem("basket", newBasket.map((object) => JSON.stringify(object)).join(',,'))
+    setBasket(newBasket)
+
+
+    //const choosables = event.target.value;
+
+  }
   console.log(productData);
   return (
     <Layout>
@@ -41,7 +58,7 @@ export default function Products({ productData }) {
             HURRY ONLY {productData.stock} LEFT IN STOCK
           </h3>
         ) : null}
-        <form>
+        <form pid={productData.id} onSubmit={(event) => addToBasket(event)}>
           <Colours colours={productData.colours} />
           <Variants variants={productData.variants} />
           <label htmlFor="quantity">Quantity:</label>
@@ -53,7 +70,7 @@ export default function Products({ productData }) {
             max={productData.stock}
             value="1"
           />
-          <button type="submit">Add to basket</button>
+          {basket ? <button type="submit">Add to basket</button> : null}
         </form>
       </section>
       <section>
