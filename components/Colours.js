@@ -1,5 +1,5 @@
 export default function Colours(props) {
-  const colours = JSON.parse(props.colours).colours;
+  const colours = !props.colours ? [] : JSON.parse(props.colours).colours;
 
   return (
     <>
