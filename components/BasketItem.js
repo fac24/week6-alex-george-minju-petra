@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function BasketItem({
   product,
@@ -8,6 +9,8 @@ export default function BasketItem({
   basketIndex,
   totalPrice,
   setTotalPrice,
+  cartTotal,
+  setCartTotal,
 }) {
   const [quantity, setQuantity] = useState(product.quantity);
 
@@ -32,6 +35,7 @@ export default function BasketItem({
 
     setBasket(basket);
     setQuantity(event.target.value);
+    setCartTotal(event.target.value);
     setTotalPrice((totalPrice - oldPrice + newPrice).toFixed(2));
   }
 
@@ -40,21 +44,25 @@ export default function BasketItem({
     const indexToRemove = basket.findIndex(
       (item) => item.pid.id === +event.target.attributes.pid.value
     );
-
+    setCartTotal(cartTotal - quantity);
     setBasket(basket.filter((_, index) => index !== indexToRemove));
   }
+
+  const href = `/products/${productData.id}`;
   return (
     <div
-      className="shadow-md rounded-xl flex flex-row h-25 p-5 w-full m-auto justify-around items-center"
+      className="shadow-md rounded-xl flex flex-col gap-4 md:flex-row h-25 p-5 w-full m-auto justify-around items-center"
       key={productData.id}
     >
-      <Image
-        src={productData.photo_url}
-        alt={productData.name}
-        width={200}
-        height={200}
-        className="rounded-lg object-contain"
-      />
+      <Link href={href}>
+        <Image
+          src={productData.photo_url}
+          alt={productData.name}
+          width={200}
+          height={200}
+          className="rounded-lg object-contain"
+        />
+      </Link>
       <div className="flex flex-col">
         <h2>{productData.name}</h2>
         <span>
@@ -69,7 +77,6 @@ export default function BasketItem({
           <select
             name="quantity"
             id={product.pid.id}
-            className="indent-4 md:indent-0"
             value={quantity}
             onChange={(event) => changeQuantity(event)}
           >
@@ -79,7 +86,7 @@ export default function BasketItem({
       </div>
       <button
         type="submit"
-        className="bg-red-200 rounded-full h-10  px-10 hover:bg-red-400"
+        className="bg-red-200 rounded-full h-12 md:h-20 px-10 hover:bg-red-400"
         pid={productData.id}
         onClick={(event) => deleteItem(event)}
       >

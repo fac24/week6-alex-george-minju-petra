@@ -3,6 +3,7 @@ import Layout from "../../components/Layout.js";
 import Image from "next/image";
 import Colours from "../../components/Colours.js";
 import Variants from "../../components/Variants.js";
+import AddBasketButton from "../../components/AddBasketButton.js";
 import Link from "next/link.js";
 import { useState } from "react";
 
@@ -24,10 +25,18 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export default function Products({ productData, basket, setBasket }) {
+export default function Products({
+  productData,
+  cartTotal,
+  setCartTotal,
+  basket,
+  setBasket,
+}) {
   const [quantity, setQuantity] = useState(1);
   function addToBasket(event) {
     event.preventDefault();
+    let nrOfItems = parseInt(event.target.querySelector("#quantity").value);
+    setCartTotal(cartTotal + nrOfItems);
     const data = new FormData(event.target);
     const productObj = Object.fromEntries(data.entries());
     productObj.pid = productData;
@@ -39,7 +48,7 @@ export default function Products({ productData, basket, setBasket }) {
   }
 
   return (
-    <Layout>
+    <Layout basket={basket} cartTotal={cartTotal} setCartTotal={setCartTotal}>
       <section className="container m-auto mt-5 p-10 pb-2">
         <div className="flex flex-row">
           <Image
@@ -82,16 +91,20 @@ export default function Products({ productData, basket, setBasket }) {
             />
             {basket ? (
               <button
-                className="bg-purple-200 text-xl rounded-full p-4 hover:bg-purple-400 mt-2"
+                className="bg-purple-200 text-xl rounded-full p-4 hover:bg-purple-400 mt-2 md:text-md"
                 type="submit"
               >
                 Add to basket
               </button>
-            ) : null}
+            ) : /* <AddBasketButton
+                cartTotal={cartTotal}
+                setCartTotal={setCartTotal}
+              /> */ //}
+            null}
           </form>
         </div>
       </section>
-      <section className="container m-auto p-10 pt-2">
+      <section className="container m-auto p-10 pt-2 flex flex-col gap-4">
         <div className="flex flex-col gap-4">
           <h2 className="text-xl">Description:</h2>
           <p className="indent-2 px-4"> {productData.description}</p>
@@ -100,10 +113,10 @@ export default function Products({ productData, basket, setBasket }) {
           <h2 className="text-xl">Category:</h2>
           <p className="indent-2 px-4">{productData.category}</p>
         </div>
+        <Link href="/">
+          <a className="text-xl mt-4"> 🔙 Back To Home</a>
+        </Link>
       </section>
-      <Link href="/">
-        <a>Back To Home</a>
-      </Link>
     </Layout>
   );
 }

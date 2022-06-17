@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import { useState, useEffect } from "react";
 import BasketItem from "../components/BasketItem.js";
 
-export default function Basket({ basket, setBasket }) {
+export default function Basket({ basket, setBasket, cartTotal, setCartTotal }) {
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
     setTotalPrice(
@@ -15,7 +15,7 @@ export default function Basket({ basket, setBasket }) {
 
   try {
     return (
-      <Layout>
+      <Layout basket={basket} cartTotal={cartTotal} setCartTotal={setCartTotal}>
         <div className="container flex flex-col m-auto mt-6 p-10 pb-2 gap-10">
           {basket.map((product, index) => {
             return (
@@ -27,6 +27,8 @@ export default function Basket({ basket, setBasket }) {
                 totalPrice={totalPrice}
                 setTotalPrice={setTotalPrice}
                 key={index}
+                cartTotal={cartTotal}
+                setCartTotal={setCartTotal}
               />
             );
           })}
