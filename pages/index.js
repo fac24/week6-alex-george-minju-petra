@@ -112,7 +112,7 @@ export default function Home({
                       £{product.price}
                     </p>
 
-                    <Link href="/">
+                    <Link href={href}>
                       <div className="flex flex-row bg-purple-200 rounded-full p-4 hover:bg-purple-400 cursor-pointer">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +129,7 @@ export default function Home({
                           />
                         </svg>
                         <a className="text-gray-700 mr-2 ml-1 text-xs font-semibold">
-                          Add To Basket
+                          View Product
                         </a>
                       </div>
                     </Link>
