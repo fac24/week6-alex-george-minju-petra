@@ -1,7 +1,5 @@
-import React from "react";
+import { useEffect } from "react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import AddBasketButton from "./addBasketButton";
 
 export default function Header({ cartTotal, setCartTotal, basket }) {
   useEffect(() => {
