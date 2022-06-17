@@ -13,36 +13,40 @@ export default function Basket({ basket, setBasket, cartTotal, setCartTotal }) {
     );
   }, [basket]);
 
-  return (
-    <Layout basket={basket} cartTotal={cartTotal} setCartTotal={setCartTotal}>
-      <div className="container flex flex-col m-auto mt-6 p-10 pb-2 gap-10">
-        {basket.map((product, index) => {
-          return (
-            <BasketItem
-              product={product}
-              basket={basket}
-              setBasket={setBasket}
-              basketIndex={index}
-              totalPrice={totalPrice}
-              setTotalPrice={setTotalPrice}
-              key={index}
-              cartTotal={cartTotal}
-              setCartTotal={setCartTotal}
-            />
-          );
-        })}
-        <div className="container m-auto p-10 flex flex-col justify-center items-center gap-4">
-          <span className="text-4xl">Total price: £{totalPrice}</span>
-          <button
-            type="submit"
-            className="text-2xl bg-purple-200 rounded-full mx-6 p-4 h-15 w-full hover:bg-purple-400"
-          >
-            💸 Checkout
-          </button>
+  try {
+    return (
+      <Layout basket={basket} cartTotal={cartTotal} setCartTotal={setCartTotal}>
+        <div className="container flex flex-col m-auto mt-6 p-10 pb-2 gap-10">
+          {basket.map((product, index) => {
+            return (
+              <BasketItem
+                product={product}
+                basket={basket}
+                setBasket={setBasket}
+                basketIndex={index}
+                totalPrice={totalPrice}
+                setTotalPrice={setTotalPrice}
+                key={index}
+                cartTotal={cartTotal}
+                setCartTotal={setCartTotal}
+              />
+            );
+          })}
+          <div className="container m-auto p-10 flex flex-col justify-center items-center gap-4">
+            <span className="text-4xl">Total price: £{totalPrice}</span>
+            <button
+              type="submit"
+              className="text-2xl bg-purple-200 rounded-full mx-6 p-4 h-15 w-full hover:bg-purple-400"
+            >
+              💸 Checkout
+            </button>
+          </div>
         </div>
-      </div>
-    </Layout>
-  );
+      </Layout>
+    );
+  } catch {
+    return (<Layout><h1>Something went wrong with loading this page.</h1></Layout>)
+  }
 }
 
 //image, quantity, variant, colour, price, name

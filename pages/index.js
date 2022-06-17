@@ -8,14 +8,19 @@ import { getAllCategories } from "../database/model.js";
 import indexImg from "../public/assets/sectech.png";
 
 export async function getServerSideProps() {
-  const allProducts = await getAllProducts();
-  const allCategories = await getAllCategories();
-  return {
-    props: {
-      allProducts,
-      allCategories,
-    },
-  };
+  try {
+    const allProducts = await getAllProducts();
+    const allCategories = await getAllCategories();
+    return {
+      props: {
+        allProducts,
+        allCategories,
+      },
+    };
+  } catch {
+    console.error();
+    return (<Layout><h1>There was a problem accessing information from our warehouse</h1></Layout>)
+  }
 }
 
 export default function Home({
