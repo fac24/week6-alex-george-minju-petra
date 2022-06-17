@@ -11,7 +11,7 @@ export default function Filter({
   setSortPrice,
 }) {
   return (
-    <form className=" container flex flex-row mt-5 mb-4 h-100 mx-auto p-5 justify-between text-lg text-gray-600">
+    <form className=" container flex flex-col gap-4 md:flex-row md:mt-5 md:mb-4 md:h-100 mx-auto p-5 md:justify-around md:text-lg text-gray-600">
       <SearchText setText={setText} />
       <Category allCategories={allCategories} setCategory={setCategory} />
       <PriceSort setSortPrice={setSortPrice} />

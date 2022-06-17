@@ -38,9 +38,9 @@ export default function Header({ cartTotal, setCartTotal, basket }) {
         <div className="flex flex-row mt-2">
           <Link
             href="/"
-            className="text-gray-600 hover:text-purple-400 text-xl p-4 inline-block"
+            className="inline-block text-gray-600 hover:text-purple-400 text-xl p-4 "
           >
-            <a className="text-gray-600 hover:text-purple-400 text-xl p-4 inline-block mr-5 font-medium">
+            <a className="hidden text-gray-600 hover:text-purple-400 text-xl p-4 md:inline-block mr-5 font-medium">
               Home
             </a>
           </Link>
