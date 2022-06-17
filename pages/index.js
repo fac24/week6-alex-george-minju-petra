@@ -9,24 +9,19 @@ import indexImg from "../public/assets/sectech.png";
 
 export async function getServerSideProps() {
   try {
-    let x = 5;
-    return x;
-    // const allProducts = await getAllProducts();
-    // const allCategories = await getAllCategories();
-    // return {
-    //   props: {
-    //     allProducts,
-    //     allCategories,
-    //   },
-    // };
+    const allProducts = await getAllProducts();
+    const allCategories = await getAllCategories();
+    return {
+      props: {
+        allProducts,
+        allCategories,
+      },
+    };
   } catch {
     console.error();
     return (<Layout><h1>There was a problem accessing information from our warehouse</h1></Layout>)
   }
 }
-<<<<<<< HEAD
-export default function Home({ allProducts, allCategories }) {
-=======
 
 export default function Home({
   allProducts,
@@ -35,7 +30,6 @@ export default function Home({
   setCartTotal,
   cartTotal,
 }) {
->>>>>>> main
   const [category, setCategory] = useState("all");
   const [text, setText] = useState("");
   const [sortPrice, setSortPrice] = useState("highest");
