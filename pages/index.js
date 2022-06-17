@@ -25,7 +25,7 @@ export async function getServerSideProps() {
     console.error();
     return (
       <Layout>
-        <h1>There was a problem accessing information from our warehouse</h1>
+        <h1>There was a problem accessing information from our warehouse.</h1>
       </Layout>
     );
   }
