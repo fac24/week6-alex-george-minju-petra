@@ -1,23 +1,24 @@
-import { getProductById, getAllProductIds } from "../../database/model.js";
+import { getProductById } from "../../database/model.js";
 import Layout from "../../components/Layout.js";
 import Image from "next/image";
 import Colours from "../../components/Colours.js";
 import Variants from "../../components/Variants.js";
-import AddBasketButton from "../../components/AddBasketButton.js";
+//import AddBasketButton from "../../components/AddBasketButton.js";
 import Link from "next/link.js";
 import { useState } from "react";
 
-export async function getStaticPaths() {
+/* export async function getStaticPaths() {
   const paths = await getAllProductIds();
 
   return {
     paths,
     fallback: false,
   };
-}
+} */
 
-export async function getStaticProps({ params }) {
-  const productData = await getProductById(params.id);
+export async function getServerSideProps({ params }) {
+  const productData = (await getProductById(params.id)) || null;
+  console.log(productData);
   return {
     props: {
       productData,
@@ -46,7 +47,29 @@ export default function Products({
 
     setBasket([...basket, productObj]);
   }
-
+  if (!productData)
+    return (
+      <>
+        <Layout
+          basket={basket}
+          cartTotal={cartTotal}
+          setCartTotal={setCartTotal}
+        >
+          <section className="container m-auto mt-5 p-10 pb-2">
+            <div className="flex flex-row">
+              <h2 className="text-2xl md:text-4xl">
+                There are no products with this id
+              </h2>
+            </div>
+          </section>
+          <section className="container m-auto p-10 pt-2 flex flex-col gap-4">
+            <Link href="/">
+              <a className="text-xl mt-4">Back To Homepage</a>
+            </Link>
+          </section>
+        </Layout>
+      </>
+    );
   return (
     <Layout basket={basket} cartTotal={cartTotal} setCartTotal={setCartTotal}>
       <section className="container m-auto mt-5 p-10 pb-2">
