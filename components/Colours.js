@@ -9,7 +9,7 @@ export default function Colours(props) {
       <select name="colours" id="colours" className="indent-4 md:indent-0">
         {colours.map((colour) => {
           return (
-            <option value={colour} key={colour}>
+            <option value={colour} key={colour} className="">
               {colour}
             </option>
           );
