@@ -68,11 +68,9 @@ export default function BasketItem({
           className="rounded-lg object-contain"
         />
       </Link>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-2">
         <h2>{productData.name}</h2>
-        <span>
-          £{productData.price} : Total: £{product.totalPrice}
-        </span>
+        <span>£{productData.price}</span>
         <span>Colour: {product.colours}</span>
         <span>
           {variantType}: {product.variants}
@@ -88,10 +86,11 @@ export default function BasketItem({
             {quantities}
           </select>
         </span>
+        <span>Subtotal: £{product.totalPrice}</span>
       </div>
       <button
         type="submit"
-        className="bg-red-200 rounded-full h-12 md:h-20 px-10 hover:bg-red-400"
+        className="bg-red-200 rounded-full h-12 md:h-20 px-16 hover:bg-red-400"
         pid={productData.id}
         onClick={(event) => deleteItem(event)}
       >

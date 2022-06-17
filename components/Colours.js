@@ -13,7 +13,7 @@ export default function Colours(props) {
       >
         {colours.map((colour) => {
           return (
-            <option value={colour} key={colour}>
+            <option value={colour} key={colour} className="">
               {colour}
             </option>
           );

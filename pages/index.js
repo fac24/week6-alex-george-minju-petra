@@ -55,18 +55,25 @@ export default function Home({
     };
   }, [ids, setSale]);
   return (
+<<<<<<< HEAD
     <>
       <div className=" container flex flex-col md:flex-row mt-17 h-100 mx-auto p-5 justify-between gap-2">
         <div className="w-2/5 flex flex-col justify-center mx-auto md:ml-20 gap-8">
           <h2 className=" text-4xl text-gray-600  md:text-left md:mb-6 mt-10 md:font-medium">
+=======
+    <Layout basket={basket} cartTotal={cartTotal} setCartTotal={setCartTotal}>
+      <div className=" container flex flex-col md:flex-row mt-17 h-100 mx-auto md:p-5 justify-between gap-2">
+        <div className="w-2/5 flex flex-col justify-center mx-auto md:ml-20 gap-y-8">
+          <h2 className="text-center text-4xl text-gray-600  md:text-left md:mb-6 mt-10 md:font-medium">
+>>>>>>> ac62f00639a2cf88fba233d58f49a7690237481f
             SecTech
           </h2>
-          <p className="text-center text-sm uppercase text-gray-600 tracking-wide md:text-left">
+          <p className="text-center text-sm uppercase text-gray-600 md:tracking-wide md:text-left">
             Shop more sustainably with second-hand electronic devices from your
             favourite brands.
           </p>
           <Link href="/">
-            <span className=" rounded-full bg-blue-200 p-3 hover:bg-purple-400 py-4 px-8 uppercase text-sm self-start md:mt-12 font-medium cursor-pointer">
+            <span className="text-center mx-auto rounded-full bg-blue-200 p-3 hover:bg-purple-400 md:ml-0 py-4 px-8 uppercase text-sm self-start md:mt-12 font-medium cursor-pointer">
               Shop now
             </span>
           </Link>

@@ -134,8 +134,11 @@ export default function Products({
                 nested
               >
                 {(close) => (
-                  <div className="modal">
-                    <button className="close" onClick={close}>
+                  <div className="modal p-4">
+                    <button
+                      className="close text-4xl text-red-400"
+                      onClick={close}
+                    >
                       &times;
                     </button>
                     <h4 className="uppercase text-gray-600 tracking-wide items-center ">
@@ -144,7 +147,7 @@ export default function Products({
                     </h4>
 
                     <div
-                      className=" flex flex-col gap-1 md:flex-row h-22 p-2   justify-around items-center"
+                      className=" flex flex-col gap-1 md:flex-row h-22 p-2 justify-around items-center"
                       key={productData.id}
                     >
                       <Image
@@ -159,17 +162,14 @@ export default function Products({
                         <span>£{productData.price}</span>
                       </div>
                     </div>
-                    <div className="actions flex flex-row justify-evenly  mb-8">
+                    <div className="actions flex flex-col gap-4 md:flex-row md:justify-evenly  md:mb-8">
                       <Link href="/basket">
-                        <a className=" rounded-full bg-blue-200 p-3 hover:bg-purple-400 py-4 px-8 uppercase text-sm self-start mt-12 font-medium">
+                        <a className=" rounded-full text-center bg-blue-200 p-3 hover:bg-purple-400 md:py-4 md:px-8 uppercase text-sm md:self-start md:mt-12 font-medium">
                           Go to checkout
                         </a>
                       </Link>
-                      <Link
-                        href="/"
-                        className=" rounded-full bg-blue-200 p-3 hover:bg-purple-400 py-4 px-8 uppercase text-sm self-start mt-12 font-medium"
-                      >
-                        <a className=" rounded-full bg-blue-200 p-3 hover:bg-purple-400 py-4 px-8 uppercase text-sm self-start mt-12 font-medium">
+                      <Link href="/">
+                        <a className=" rounded-full text-center bg-blue-200 p-3 hover:bg-purple-400 md:py-4 md:px-8 uppercase text-sm md:self-start md:mt-12 font-medium">
                           Explore more
                         </a>
                       </Link>
