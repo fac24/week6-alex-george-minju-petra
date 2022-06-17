@@ -1,20 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import Image from "next/image";
 import Filter from "../components/Filter";
 import Link from "next/link";
-import { getAllProducts } from "../database/model";
+import { getAllProducts, getAllProductIds } from "../database/model";
 import { getAllCategories } from "../database/model.js";
 import indexImg from "../public/assets/sectech.png";
+import Popup from "reactjs-popup";
 
 export async function getServerSideProps() {
   try {
     const allProducts = await getAllProducts();
     const allCategories = await getAllCategories();
+    const ids = await getAllProductIds();
+    // console.log(ids);
     return {
       props: {
         allProducts,
         allCategories,
+        ids,
       },
     };
   } catch {
@@ -33,13 +37,25 @@ export default function Home({
   basket,
   setCartTotal,
   cartTotal,
+  sale,
+  setSale,
+  ids,
 }) {
   const [category, setCategory] = useState("all");
   const [text, setText] = useState("");
   const [sortPrice, setSortPrice] = useState("highest");
 
+  useEffect(() => {
+    const interval = setInterval(
+      () => setSale(ids[Math.floor(Math.random() * ids.length)].id),
+      10000
+    );
+    return () => {
+      clearInterval(interval);
+    };
+  }, [ids, setSale]);
   return (
-    <Layout basket={basket} cartTotal={cartTotal} setCartTotal={setCartTotal}>
+    <>
       <div className=" container flex flex-col md:flex-row mt-17 h-100 mx-auto md:p-5 justify-between gap-2">
         <div className="w-2/5 flex flex-col justify-center mx-auto md:ml-20 gap-y-8">
           <h2 className="text-center text-4xl text-gray-600  md:text-left md:mb-6 mt-10 md:font-medium">
@@ -111,13 +127,25 @@ export default function Home({
                       </p>
                     </div>
                   </Link>
-                  <div className="flex flex-row justify-between content-center h-15">
+                  {sale === product.id ? (
+                    <h3 className="text-red-400 font-extrabold">SALE!!!</h3>
+                  ) : null}
+                  <div className="flex flex-row justify-between content-start h-15">
                     <p className="index-product-price font-semibold inline-block mr-2 text-gray-700 text-base py-2 ">
-                      £{product.price}
+                      {sale === product.id ? (
+                        <>
+                          <s>£{product.price}</s>{" "}
+                          <b className="text-red-400 font-extrabold">
+                            £{(product.price * 0.8).toFixed(2)}
+                          </b>{" "}
+                        </>
+                      ) : (
+                        <>£{product.price}</>
+                      )}
                     </p>
 
                     <Link href={href}>
-                      <div className="flex flex-row bg-purple-200 rounded-full p-4 hover:bg-purple-400 cursor-pointer">
+                      <div className="flex flex-row bg-purple-200 rounded-full p-4 md:w-35 md:h-15 hover:bg-purple-400 cursor-pointer">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-4 w-4 inline-block mr-2 text-gray-700"
@@ -143,6 +171,6 @@ export default function Home({
             })}
         </ul>
       </div>
-    </Layout>
+    </>
   );
 }

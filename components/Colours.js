@@ -6,7 +6,11 @@ export default function Colours(props) {
       <label htmlFor="colours" className="text-lg py-4">
         Select colour:
       </label>
-      <select name="colours" id="colours" className="indent-4 md:indent-0">
+      <select
+        name="colours"
+        id="colours"
+        className=" border-solid border-2 border-blue-200 w-44 ml-2 rounded-md p-2"
+      >
         {colours.map((colour) => {
           return (
             <option value={colour} key={colour} className="">
