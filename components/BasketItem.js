@@ -87,6 +87,11 @@ export default function BasketItem({
           </select>
         </span>
         <span>Subtotal: £{product.totalPrice}</span>
+        {sale === product.pid.id ? (
+          <span className="text-red-400 font-extrabold">
+            Total With Savings: £{(product.totalPrice * 0.8).toFixed(2)}
+          </span>
+        ) : null}
       </div>
       <button
         type="submit"

@@ -11,14 +11,27 @@ export default function Basket({
   sale,
 }) {
   const [totalPrice, setTotalPrice] = useState(0);
+  const [savings, setSavings] = useState(0);
   useEffect(() => {
+    setSavings(
+      basket
+        .reduce((acc, product) => {
+          if (product.pid.id === sale) {
+            return acc + parseFloat(product.totalPrice) * 0.2;
+          }
+          return acc;
+        }, 0)
+        .toFixed(2)
+    );
     setTotalPrice(
-      basket.reduce((acc, product) => {
-        if (product.pid.id === sale) {
-          return acc + parseFloat(product.totalPrice) * 0.8;
-        }
-        return acc + parseFloat(product.totalPrice);
-      }, 0)
+      basket
+        .reduce((acc, product) => {
+          if (product.pid.id === sale) {
+            return acc + parseFloat(product.totalPrice) * 0.8;
+          }
+          return acc + parseFloat(product.totalPrice);
+        }, 0)
+        .toFixed(2)
     );
   }, [basket, sale]);
 
@@ -43,6 +56,11 @@ export default function Basket({
         })}
         <div className="container m-auto p-10 flex flex-col justify-center items-center gap-4">
           <span className="text-4xl">Total price: £{totalPrice}</span>
+          {savings !== 0.0 ? (
+            <span className="text-red-400 font-extrabold">
+              Total saved: £{savings}
+            </span>
+          ) : null}
           <button
             type="submit"
             className="text-2xl bg-purple-200 rounded-full mx-6 p-4 h-15 w-full hover:bg-purple-400"
@@ -53,11 +71,7 @@ export default function Basket({
       </div>
     );
   } catch {
-    return (
-      <Layout>
-        <h1>Something went wrong with loading this page.</h1>
-      </Layout>
-    );
+    return <h1>Something went wrong with loading this page.</h1>;
   }
 }
 
