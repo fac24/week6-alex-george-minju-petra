@@ -47,6 +47,10 @@ describe('Product tests', () => {
         expect(localStorage.getItem('basket')).to.include('Acer');
         expect(localStorage.getItem('basket')).not.to.include('Logitech');
       })
+    cy.visit("/basket");
+    cy.contains('h2', 'Acer');
+    //this is not a great test in its current form, since it only resets reliably if the basket is empty at the beginning
+    cy.contains('button', 'Delete').click();
     cy.clearLocalStorage();
   })
 })
