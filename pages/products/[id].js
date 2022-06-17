@@ -74,15 +74,13 @@ export default function Products({
     <Layout basket={basket} cartTotal={cartTotal} setCartTotal={setCartTotal}>
       <section className="container m-auto mt-5 p-10 pb-2">
         <div className="flex flex-row">
-          {productData === null ? (
-            <Image
-              src={productData.photo_url}
-              alt="Picture of the product"
-              width={500}
-              height={500}
-              className="h-48 w-full object-contain md:h-full md:w-48"
-            />
-          ) : null}
+          <Image
+            src={productData.photo_url}
+            alt="Picture of the product"
+            width={500}
+            height={500}
+            className="h-48 w-full object-contain md:h-full md:w-48"
+          />
           <div className="flex flex-col m-10 gap-4">
             <h2 className="text-2xl md:text-4xl">{productData.name}</h2>
             <p className="text-2xl">£{productData.price}</p>

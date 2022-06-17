@@ -1,7 +1,5 @@
 export default function Variants(props) {
-  const { variants, variantType } = !props.variants
-    ? { variants: [] }
-    : JSON.parse(props.variants);
+  const { variants, variantType } = JSON.parse(props.variants);
 
   return (
     <>

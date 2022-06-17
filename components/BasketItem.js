@@ -29,20 +29,24 @@ export default function BasketItem({
   function changeQuantity(event) {
     const oldPrice = basket[basketIndex].totalPrice;
     const newPrice = basket[basketIndex].pid.price * event.target.value;
+    const oldQuant = basket[basketIndex].quantity;
+    const newQuant = event.target.value;
 
-    basket[basketIndex].quantity = event.target.value;
+    basket[basketIndex].quantity = newQuant;
     basket[basketIndex].totalPrice = newPrice.toFixed(2);
 
     setBasket(basket);
-    setQuantity(event.target.value);
-    setCartTotal(event.target.value);
+    setQuantity(newQuant);
+    setCartTotal(cartTotal - +oldQuant + +newQuant);
     setTotalPrice((totalPrice - oldPrice + newPrice).toFixed(2));
   }
 
   function deleteItem(event) {
     event.preventDefault();
     const indexToRemove = basket.findIndex(
-      (item) => item.pid.id === +event.target.attributes.pid.value
+      (item) =>
+        (item.pid.id === +event.target.attributes.pid.value) &
+        (item.quantity === quantity)
     );
     setCartTotal(cartTotal - quantity);
     setBasket(basket.filter((_, index) => index !== indexToRemove));

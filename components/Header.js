@@ -14,7 +14,7 @@ export default function Header({ cartTotal, setCartTotal, basket }) {
       });
     }
     setCartTotal(quantity);
-  }, []);
+  }, [setCartTotal]);
 
   return (
     <header className="container h-20 mx-auto p-5">
