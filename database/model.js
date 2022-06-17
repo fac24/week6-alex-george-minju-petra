@@ -28,14 +28,7 @@ async function getProductById(id) {
 async function getAllProductIds() {
   const ALL_IDS = `SELECT id FROM products`;
 
-  const ids = await db.query(ALL_IDS).then((result) => result.rows);
-  return ids.map((productId) => {
-    return {
-      params: {
-        id: `${productId.id}`,
-      },
-    };
-  });
+  return await db.query(ALL_IDS).then((result) => result.rows);
 }
 
 export { getAllProducts, getAllProductIds, getProductById, getAllCategories };

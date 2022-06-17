@@ -11,6 +11,7 @@ export default function BasketItem({
   setTotalPrice,
   cartTotal,
   setCartTotal,
+  sale,
 }) {
   const [quantity, setQuantity] = useState(product.quantity);
 

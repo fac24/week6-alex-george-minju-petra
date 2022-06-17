@@ -34,6 +34,7 @@ export default function Products({
   setCartTotal,
   basket,
   setBasket,
+  sale,
 }) {
   const [quantity, setQuantity] = useState(1);
   function addToBasket(event) {
@@ -52,28 +53,22 @@ export default function Products({
   if (!productData)
     return (
       <>
-        <Layout
-          basket={basket}
-          cartTotal={cartTotal}
-          setCartTotal={setCartTotal}
-        >
-          <section className="container m-auto mt-5 p-10 pb-2">
-            <div className="flex flex-row">
-              <h2 className="text-2xl md:text-4xl">
-                There are no products with this id
-              </h2>
-            </div>
-          </section>
-          <section className="container m-auto p-10 pt-2 flex flex-col gap-4">
-            <Link href="/">
-              <a className="text-xl mt-4">Back To Homepage</a>
-            </Link>
-          </section>
-        </Layout>
+        <section className="container m-auto mt-5 p-10 pb-2">
+          <div className="flex flex-row">
+            <h2 className="text-2xl md:text-4xl">
+              There are no products with this id
+            </h2>
+          </div>
+        </section>
+        <section className="container m-auto p-10 pt-2 flex flex-col gap-4">
+          <Link href="/">
+            <a className="text-xl mt-4">Back To Homepage</a>
+          </Link>
+        </section>
       </>
     );
   return (
-    <Layout basket={basket} cartTotal={cartTotal} setCartTotal={setCartTotal}>
+    <>
       <section className="container m-auto mt-5 p-10 pb-2">
         <div className="flex flex-col md:flex-row">
           <Image
@@ -85,7 +80,18 @@ export default function Products({
           />
           <div className="flex flex-col m-10 gap-4">
             <h2 className="text-2xl md:text-4xl">{productData.name}</h2>
-            <p className="text-2xl">£{productData.price}</p>
+            <p className="text-2xl">
+              {sale === productData.id ? (
+                <>
+                  <s>£{productData.price}</s>{" "}
+                  <b className="text-red-400 font-extrabold">
+                    £{(productData.price * 0.8).toFixed(2)}
+                  </b>{" "}
+                </>
+              ) : (
+                <>£{productData.price}</>
+              )}
+            </p>
             {productData.stock < 3 ? (
               <h3 className="text-red-600 text-xl">
                 HURRY ONLY {productData.stock} LEFT IN STOCK
@@ -111,7 +117,7 @@ export default function Products({
               min="1"
               max={productData.stock}
               value={quantity}
-              className="indent-4 md:indent-0"
+              className="indent-4 md:indent-0 border-solid border-2 border-blue-200 w-44 ml-2 rounded-md p-4 "
               onChange={(event) => setQuantity(event.target.value)}
             />
             {basket ? (
@@ -188,6 +194,6 @@ export default function Products({
           <a className="text-xl mt-4"> 🔙 Back To Home</a>
         </Link>
       </section>
-    </Layout>
+    </>
   );
 }
