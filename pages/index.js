@@ -108,27 +108,27 @@ export default function Home({
                       £{product.price}
                     </p>
 
-                    <div className="flex flex-row bg-purple-200 rounded-full p-4 hover:bg-purple-400">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 inline-block mr-2 text-gray-700"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                        />
-                      </svg>
-                      <Link href="/">
+                    <Link href="/">
+                      <div className="flex flex-row bg-purple-200 rounded-full p-4 hover:bg-purple-400 cursor-pointer">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 inline-block mr-2 text-gray-700"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                          />
+                        </svg>
                         <a className="text-gray-700 mr-2 ml-1 text-xs font-semibold">
-                          Add To Cart
+                          Add To Basket
                         </a>
-                      </Link>
-                    </div>
+                      </div>
+                    </Link>
                   </div>
                 </li>
               );
