@@ -73,7 +73,7 @@ export default function Products({
   return (
     <Layout basket={basket} cartTotal={cartTotal} setCartTotal={setCartTotal}>
       <section className="container m-auto mt-5 p-10 pb-2">
-        <div className="flex flex-row">
+        <div className="flex flex-col md:flex-row">
           <Image
             src={productData.photo_url}
             alt="Picture of the product"

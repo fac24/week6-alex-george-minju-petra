@@ -24,7 +24,9 @@ export default function Layout({ children, basket, cartTotal, setCartTotal }) {
           <li>English 🇬🇧</li>
         </ul>
         <p>All rights reserved.</p>
-        <p className="text-sm">Copyright © 2022 FAC24 Week6-Group3</p>
+        <p className="text-sm text-center">
+          Copyright <br className="md:hidden"></br>© 2022 FAC24 Week6-Group3
+        </p>
       </footer>
     </div>
   );

@@ -31,28 +31,28 @@ export default function Home({
 
   return (
     <Layout basket={basket} cartTotal={cartTotal} setCartTotal={setCartTotal}>
-      <div className=" container flex flex-row mt-17 h-100 mx-auto p-5 justify-between">
-        <div className="w-2/5 flex flex-col justify-center ml-20">
-          <h2 className="text-4xl text-gray-600  md:text-left mb-6 mt-10 font-medium">
+      <div className=" container flex flex-col md:flex-row mt-17 h-100 mx-auto p-5 justify-between gap-2">
+        <div className="w-2/5 flex flex-col justify-center mx-auto md:ml-20 gap-8">
+          <h2 className=" text-4xl text-gray-600  md:text-left md:mb-6 mt-10 md:font-medium">
             SecTech
           </h2>
-          <p className="uppercase text-gray-600 tracking-wide md:text-left">
+          <p className="text-center text-sm uppercase text-gray-600 tracking-wide md:text-left">
             Shop more sustainably with second-hand electronic devices from your
             favourite brands.
           </p>
           <Link href="/">
-            <button className=" rounded-full bg-blue-200 p-3 hover:bg-purple-400 py-4 px-8 uppercase text-sm self-start mt-12 font-medium">
+            <span className=" rounded-full bg-blue-200 p-3 hover:bg-purple-400 py-4 px-8 uppercase text-sm self-start md:mt-12 font-medium cursor-pointer">
               Shop now
-            </button>
+            </span>
           </Link>
         </div>
-        <div className="w-3/5 ml-24">
+        <div className="md:w-3/5 md:ml-24 ">
           <Image src={indexImg} alt="" width={500} height={400} />
         </div>
       </div>
 
       <div className=" container mt-17 mx-auto p-5">
-        <h2 className="text-3xl text-gray-600 mb-4 mt-4 font-medium">
+        <h2 className="text-center md:text-left md:pl-20 text-3xl text-gray-600 mb-4 mt-4 font-medium ">
           Products
         </h2>
         <Filter
@@ -89,45 +89,45 @@ export default function Home({
                   className="shadow-md rounded-lg p-5 flex flex-col"
                 >
                   <Link href={href}>
-                    <a>
+                    <div className="flex flex-col">
                       <Image
                         src={product.photo_url}
                         alt=""
                         width={300}
                         height={300}
-                        className="rounded-lg self-center"
+                        className="rounded-lg self-center object-contain mx-auto"
                       />
                       <p className="index-product-h3 text-lg font-semibold text-gray-700 pt-3 pb-5 mt-3 mb-2">
                         {product.name}{" "}
                       </p>
-                    </a>
+                    </div>
                   </Link>
                   <div className="flex flex-row justify-between content-center h-15">
                     <p className="index-product-price font-semibold inline-block mr-2 text-gray-700 text-base py-2 ">
                       £{product.price}
                     </p>
 
-                    <div className="flex flex-row bg-purple-200 rounded-full p-4 hover:bg-purple-400">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 inline-block mr-2 text-gray-700"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                        />
-                      </svg>
-                      <Link href="/">
+                    <Link href="/">
+                      <div className="flex flex-row bg-purple-200 rounded-full p-4 hover:bg-purple-400 cursor-pointer">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 inline-block mr-2 text-gray-700"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                          />
+                        </svg>
                         <a className="text-gray-700 mr-2 ml-1 text-xs font-semibold">
-                          Add To Cart
+                          Add To Basket
                         </a>
-                      </Link>
-                    </div>
+                      </div>
+                    </Link>
                   </div>
                 </li>
               );
