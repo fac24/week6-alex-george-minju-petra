@@ -6,6 +6,8 @@ import Variants from "../../components/Variants.js";
 import AddBasketButton from "../../components/AddBasketButton.js";
 import Link from "next/link.js";
 import { useState } from "react";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
 export async function getStaticPaths() {
   const paths = await getAllProductIds();
@@ -90,17 +92,63 @@ export default function Products({
               onChange={(event) => setQuantity(event.target.value)}
             />
             {basket ? (
-              <button
-                className="bg-purple-200 text-xl rounded-full p-4 hover:bg-purple-400 mt-2 md:text-md"
-                type="submit"
+              <Popup
+                trigger={
+                  <button
+                    className="bg-purple-200 text-xl rounded-full p-4 hover:bg-purple-400 mt-2 md:text-md"
+                    type="submit"
+                  >
+                    Add to basket
+                  </button>
+                }
+                modal
+                nested
               >
-                Add to basket
-              </button>
-            ) : /* <AddBasketButton
-                cartTotal={cartTotal}
-                setCartTotal={setCartTotal}
-              /> */ //}
-            null}
+                {(close) => (
+                  <div className="modal">
+                    <button className="close" onClick={close}>
+                      &times;
+                    </button>
+                    <h4 className="uppercase text-gray-600 tracking-wide items-center ">
+                      {" "}
+                      You have successfully added this product to your basket!
+                    </h4>
+
+                    <div
+                      className=" flex flex-col gap-1 md:flex-row h-22 p-2   justify-around items-center"
+                      key={productData.id}
+                    >
+                      <Image
+                        src={productData.photo_url}
+                        alt={productData.name}
+                        width={200}
+                        height={200}
+                        className="rounded-lg object-contain"
+                      />
+                      <div className="flex flex-col">
+                        <h2>{productData.name}</h2>
+                        <span>£{productData.price}</span>
+                      </div>
+                    </div>
+                    <div className="actions flex flex-row justify-evenly  mb-8">
+                      <Link href="/basket">
+                        <a className=" rounded-full bg-blue-200 p-3 hover:bg-purple-400 py-4 px-8 uppercase text-sm self-start mt-12 font-medium">
+                          Go to checkout
+                        </a>
+                      </Link>
+                      <Link
+                        href="/"
+                        className=" rounded-full bg-blue-200 p-3 hover:bg-purple-400 py-4 px-8 uppercase text-sm self-start mt-12 font-medium"
+                      >
+                        <a className=" rounded-full bg-blue-200 p-3 hover:bg-purple-400 py-4 px-8 uppercase text-sm self-start mt-12 font-medium">
+                          Explore more
+                        </a>
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </Popup>
+            ) : null}
           </form>
         </div>
       </section>
