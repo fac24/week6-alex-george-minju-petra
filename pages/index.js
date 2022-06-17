@@ -42,9 +42,9 @@ export default function Home({
             favourite brands.
           </p>
           <Link href="/">
-            <button className=" rounded-full bg-blue-200 p-3 hover:bg-purple-400 py-4 px-8 uppercase text-sm self-start mt-12 font-medium">
+            <span className=" rounded-full bg-blue-200 p-3 hover:bg-purple-400 py-4 px-8 uppercase text-sm self-start mt-12 font-medium cursor-pointer">
               Shop now
-            </button>
+            </span>
           </Link>
         </div>
         <div className="w-3/5 ml-24">
